@@ -3,12 +3,14 @@
 <?php
 include 'librerie/libreria.php';
 
+$currentPage = 'dashboard';
 
 ?>
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
+  <script src="js/libreria.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/docs/5.3/assets/js/color-modes.js"></script>
@@ -131,7 +133,7 @@ include 'librerie/libreria.php';
 
 <div class="container-fluid">
   <div class="row">
-  <?php echo getSideBar();?>
+  <?php echo getSideBar($currentPage);?>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
@@ -284,6 +286,21 @@ include 'librerie/libreria.php';
     </main>
   </div>
 </div>
+
+<input type="hidden" id="pagina" value="">
+<script>
+  
+document.getElementById("navbar").addEventListener("click", function(e) {
+
+if(e.target.matches(".nav-link")) {
+
+  // chiama la funzione definita in funzioni.js
+  activeClass();
+
+}
+
+});
+</script>
 <script src="js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>

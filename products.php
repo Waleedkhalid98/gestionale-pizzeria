@@ -1,9 +1,11 @@
 <?php 
 include 'librerie/Database.php';
 include 'librerie/libreria.php';
+$currentPage = 'products';
 
 
 $db = new Database();
+
 
 ?>
 
@@ -11,6 +13,8 @@ $db = new Database();
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
+
+  
     <style>
       table {
   font-size: 20px;
@@ -188,7 +192,7 @@ echo getHeader();
 
 <div class="container-fluid">
   <div class="row">
-    <?php echo getSideBar();?>
+    <?php echo getSideBar($currentPage);?>
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Inserisci un nuovo prodotto
@@ -350,11 +354,23 @@ echo getHeader();
           </div>
       </div>
   </div>
-<script > aggiornaTabella()</script>
-<script src="js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="js/funzioni.js"  crossorigin="anonymous"></script>
+  <script src="js/funzioni.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>
+  <button onclick="saluta()">Clicca qui</button>
+  <script>
+  
+  document.getElementById("navbar").addEventListener("click", function(e) {
+  
+  if(e.target.matches(".nav-link")) {
+  
+    // chiama la funzione definita in funzioni.js
+    activeClass();
+  
+  }
+  
+  });
+  </script><script src="js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>
 </html>
 <!-- DATATABLE  -->
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -365,7 +381,7 @@ echo getHeader();
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
 <script>
   $('#prodotti').DataTable({
-    "paging": false,
+    "paging": true,
     "info": false,
     "searching": false,
     dom: 'Bfrtip',
@@ -453,6 +469,9 @@ echo getHeader();
 
   function chiudimodal() {
       $('#conferma').modal('hide')
-    }
+  }
+
+  activeClass();
+
 
 </script>
