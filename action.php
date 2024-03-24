@@ -1,21 +1,10 @@
 <?php
 include 'librerie/Database.php';
+include 'librerie/libreria_metodi.php';
   
 $db = new Database();
 
 
-function get_param($name) {
-    if (isset($_GET[$name])) {
-      return $_GET[$name];
-    }
-    
-    if (isset($_POST[$name])) {
-      return $_POST[$name];
-    }
-  
-    return null;
-  }
-  
 
 $paction=get_param("_action");
 
