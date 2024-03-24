@@ -1,70 +1,21 @@
 <?php 
-include 'librerie/Database.php';
 include 'librerie/libreria.php';
+
 $currentPage = 'products';
 
 
 $db = new Database();
-
 
 ?>
 
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head>
+<head>
 
   
-    <style>
-      table {
-  font-size: 20px;
-  padding: 13px; 
-
-  .disabled {
-  pointer-events: none;
-}
-
-.opacity-50 {
-  opacity: 0.5; 
-}
-
-.dataTables_wrapper .dt-buttons {
-  float:none;  
-  text-align:center;
-}
-}
-    </style>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
-  <script src="/docs/5.3/assets/js/color-modes.js"></script>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.118.2">
-    <title>Dashboard Template · Bootstrap v5.3</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
-
-    
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-<link href="css/bootstrap.min.css" rel="stylesheet" >
-
-    <!-- Favicons -->
-<link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
-<meta name="theme-color" content="#712cf9">
-
-
-    <style>
-      .bd-placeholder-img {
+  <style>
+    .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
         -webkit-user-select: none;
@@ -138,57 +89,37 @@ $db = new Database();
       }
 
       .bd-mode-toggle .dropdown-menu .active .bi {
-        display: block !important;
+        dis
+        play: block !important;
       }
-    </style>
 
+      table {
+          font-size: 20px;
+          padding: 13px; 
+
+          .disabled {
+          pointer-events: none;
+        }
+
+        .opacity-50 {
+          opacity: 0.5; 
+        }
+
+        .dataTables_wrapper .dt-buttons {
+          float:none;  
+          text-align:center;
+        }
+      }
+  </style>
+<?php librerie() ;?>
+
+ <?php iconeSvg(); ?>
+
+</head>
+<body>
     
-    <!-- Custom styles for this template -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/dashbord.css" rel="stylesheet">
-  </head>
-  <body>
-    
-<!-- 
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-              id="bd-theme"
-              type="button"
-              aria-expanded="false"
-              data-bs-toggle="dropdown"
-              aria-label="Toggle theme (auto)">
-        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-            Light
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-            Dark
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
-            Auto
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-      </ul>
-    </div> -->
-<?php 
-echo iconeSvg();
-echo getHeader();
-?>
+
+<?php echo getHeader();?>
 
 <div class="container-fluid">
   <div class="row">
@@ -249,7 +180,7 @@ echo getHeader();
             </form> 
           
           
-            <a href="#" class="btn btn-primary" onclick="apriModal()">Inserisci</a>
+            <button  class="btn btn-primary" onclick="apriModal()">Inserisci</button>
             
           </div>
         </div>
@@ -332,12 +263,14 @@ echo getHeader();
   </div>
 </div>
 
+
+
 <!-- MODAL -->
-<div class="modal fade" tabindex="-1" role="dialog" id="conferma" aria-labelledby="modal_stampaTitle">
+<div class="modal fade" tabindex="-1" role="dialog" id="ciao" aria-labelledby="modal_stampaTitle">
       <div class="modal-dialog  " role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h2 class="modal-title h5 " id="conferma">Attenzione</h2>
+                  <h2 class="modal-title h5 " id="ciao">Attenzione</h2>
         
                   
               </div>
@@ -356,20 +289,7 @@ echo getHeader();
   </div>
   <script src="js/funzioni.js"></script>
 
-  <button onclick="saluta()">Clicca qui</button>
-  <script>
-  
-  document.getElementById("navbar").addEventListener("click", function(e) {
-  
-  if(e.target.matches(".nav-link")) {
-  
-    // chiama la funzione definita in funzioni.js
-    activeClass();
-  
-  }
-  
-  });
-  </script><script src="js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>
 </html>
 <!-- DATATABLE  -->
@@ -413,8 +333,10 @@ echo getHeader();
 <script>
 
 
+
+
   function apriModal(){
-    $('#conferma').modal('show');
+    $('#ciao').modal('show');
   }
 
 
@@ -471,7 +393,6 @@ echo getHeader();
       $('#conferma').modal('hide')
   }
 
-  activeClass();
 
 
 </script>

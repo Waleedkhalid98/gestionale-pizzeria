@@ -25,7 +25,6 @@ switch($paction)
        $nome=get_param("_nome");
        $fornitore=get_param("_fornitore");
        $prezzo=get_param("_prezzo");
-       echo $saluto ='ciao'.$nome.$fornitore.$prezzo;
        
         if ($db->insertProdotto($nome, $fornitore, $prezzo)) {
         echo "Prodotto inserito con successo";

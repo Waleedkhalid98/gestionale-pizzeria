@@ -358,7 +358,7 @@ if(e.target.matches(".nav-link")) {
 
     $.ajax({
 			type: "POST",
-			url: 'action.php?_action=inserisciProdotto&_nome='+encodeURIComponent(nome),
+			url: 'action.php?_action=inserisciProdotto&_nome='+encodeURIComponent(nome)+'&_prezzo=30'+'&_fornitore=ciao',
 			cache: false,
 			contentType: false,
 			processData: false,
