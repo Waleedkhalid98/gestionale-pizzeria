@@ -3,6 +3,15 @@
 include 'librerie/libreria.php';
 $currentPage = 'orders';
 
+$db = new Database();
+
+$prodotto;
+
+$result = $db->conn->query("SELECT * FROM prodotti");
+
+ while ($row = $result->fetch_assoc()) {
+    $result_array[] = $row;
+}
 ?>
 
 <!doctype html>
@@ -156,10 +165,26 @@ $currentPage = 'orders';
           <form>
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row mb-4">
-              <div class="col">
+            <div class="col">
                 <div data-mdb-input-init class="form-outline">
-                  <input type="text" id="nome" class="form-control" />
-                  <label class="form-label" for="nome">Nome</label>
+                <select class="form-select form-select-lg mb-3" aria-label="Large select example"
+											name="idsl_disponibilita" onchange="changePrezzo(2);"   >
+                      <option selected>Open this select menu</option>
+											<?php
+										
+
+
+                    
+                    foreach ($result_array as $row) {
+                       
+                  
+												
+													echo '<option value="' . $row['idProdotto']. '">' .  $row['Nome'] . '</option>';
+
+												
+											}
+											?>
+										</select>
                 </div>
               </div>
               <div class="col">

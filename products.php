@@ -233,26 +233,38 @@ $db = new Database();
                           </tr>
                         </thead>
                         <tbody id="tbodyProdotti">
-                          <?php 
+                        <?php
+                          $result_array = array();
+                          $numTot = 0; // Inizializza $numTot a 0
+
                           $result = $db->conn->query("SELECT * FROM prodotti");
 
-                          // Costruisci il formato HTML della tabella
-                          
                           while ($row = $result->fetch_assoc()) {
+                              $result_array[] = $row;
+                          }
+
+                          foreach ($result_array as $row) {
+                              $num = $row['prezzo'];
+                              $numTot += $num; // Aggiorna $numTot sommando il valore di $num
+                          }
+
+                            foreach ($result_array as $row) {
                               echo "<tr>";
                               echo "<td>" . $row['idProdotto'] . "</td>";
-                              echo  "<td>" . $row['Nome'] . "</td>";
-                              echo  "<td>" . $row['fornitore'] . "</td>";
-                              echo  "<td>" . $row['prezzo'] ."€". "</td>";
-                              echo  "</tr>";
+                              echo "<td>" . $row['Nome'] . "</td>";
+                              echo "<td>" . $row['fornitore'] . "</td>";
+                              echo "<td>" . $row['prezzo'] . "€" . "</td>";
+                              echo "</tr>";
                           }
-                          
-                          
+
+                          // Stampa il prezzo totale
+
                           ?>
+
                         </tbody>
                       </table>
                     </div>
-
+                    <?php echo $numTot?>
                   </div>
                 </div>
               </div>
@@ -314,8 +326,8 @@ $db = new Database();
               margin: [15,15,15,15], // top, right, bottom, left
 
               text: 'Estrai PDF',
-              orientation: 'portrait', // Puoi scegliere 'portrait' o 'landscape'
-              pageSize: 'A4' // Altre opzioni possibili sono 'A3', 'A5', ecc.
+              orientation: 'landscape', // Puoi scegliere 'portrait' o 'landscape'
+              pageSize: 'A5' // Altre opzioni possibili sono 'A3', 'A5', ecc.
           }
 
               ],
