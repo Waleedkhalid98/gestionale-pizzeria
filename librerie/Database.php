@@ -28,6 +28,8 @@ class Database {
         }
     }
 
+    
+
 
     public function ottieniProdotti (){
         $result = $this->conn->query("SELECT * FROM prodotti");
@@ -43,6 +45,23 @@ class Database {
             $html .= "</tr>";
         }
         return $html;
+    }
+
+
+    public function ottieniNome($id) {
+        $result = $this->conn->query("SELECT prezzo FROM prodotti WHERE idProdotto = '$id'");
+        
+        if ($result && $result->num_rows > 0) {
+            // Estrai il prezzo dalla riga risultante
+            $row = $result->fetch_assoc();
+            $prezzo = $row['prezzo'];
+            
+            // Restituisci il valore del prezzo
+            return $prezzo;
+        } else {
+            // Se non ci sono risultati, restituisci null o un valore predefinito
+            return null;
+        }
     }
     
     public function closeConnection() {

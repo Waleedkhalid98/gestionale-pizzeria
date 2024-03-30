@@ -17,36 +17,12 @@ $result = $db->conn->query("SELECT * FROM prodotti");
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
-  <script src="js/libreria.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
-  <script src="/docs/5.3/assets/js/color-modes.js"></script>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.118.2">
-    <title>Dashboard Template · Bootstrap v5.3</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
-
-    
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-<link href="css/bootstrap.min.css" rel="stylesheet" >
-
-    <!-- Favicons -->
-<link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
-<meta name="theme-color" content="#712cf9">
-
+ 
 
     <style>
+      /* #quantity.form-control {
+          width: 5% !important;
+        } */
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -125,11 +101,9 @@ $result = $db->conn->query("SELECT * FROM prodotti");
       }
     </style>
 
-    
-    <!-- Custom styles for this template -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/dashbord.css" rel="stylesheet">
+<?php librerie() ;?>
+
+<?php iconeSvg(); ?>
   </head>
   <body>
 
@@ -168,30 +142,25 @@ $result = $db->conn->query("SELECT * FROM prodotti");
             <div class="col">
                 <div data-mdb-input-init class="form-outline">
                 <select class="form-select form-select-lg mb-3" aria-label="Large select example"
-											name="idsl_disponibilita" onchange="changePrezzo(2);"   >
+											name="idsl_disponibilita" id="idsl_disponibilita" onchange="cambiaPrezzo();">
                       <option selected>Open this select menu</option>
 											<?php
-										
-
-
-                    
-                    foreach ($result_array as $row) {
-                       
-                  
-												
-													echo '<option value="' . $row['idProdotto']. '">' .  $row['Nome'] . '</option>';
-
-												
-											}
+                         foreach ($result_array as $row) {
+													  echo '<option value="' . $row['idProdotto']. '">' .  $row['Nome'] . '</option>';												
+										  	}
 											?>
-										</select>
+								</select>
                 </div>
               </div>
               <div class="col">
-                <div data-mdb-input-init class="form-outline">
-                  <input type="text" id="prezzo" class="form-control" />
-                  <label class="form-label" for="prezzo">prezzo</label>
-                </div>
+              <div class="input-group ">
+                <span class="input-group-text" id="basic-addon1">
+                  <svg class="bi currency-euro .text-primary" role="img" aria-label="Tools">
+                    <use xlink:href="icon/bootstrap-icons.svg#currency-euro"/> 
+                  </svg>
+                </span>
+                <input type="text" class="form-control" id="prezzo" placeholder="inserisci" aria-label="inserisci" aria-describedby="basic-addon1">
+              </div>
               </div>
             </div>
           
@@ -206,16 +175,33 @@ $result = $db->conn->query("SELECT * FROM prodotti");
               <input type="text" id="form6Example4" class="form-control" />
               <label class="form-label" for="form6Example4">Address</label>
             </div>
-          
-            <select id="product-quantity">
-                <option value="1">1</option> 
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
+
+            <div class="col-lg-3">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="quantity-left-minus btn  "  data-type="minus" data-field="">
+                        <svg class="bi currency-euro .text-primary" role="img" aria-label="Tools">
+                          <use xlink:href="icon/bootstrap-icons.svg#dash-circle"/> 
+                        </svg>                                        </button>
+                    </span>
+                    <div class="col-2">
+                    <input type="text" id="quantity" name="quantity" class="form-control "  value="1" min="1" max="100"  >
+
+                    </div>
+                    <span class="input-group-btn">
+                        <button type="button" class="quantity-right-plus btn  " data-type="plus" data-field="">
+                        <svg class="bi currency-euro .text-primary" role="img" aria-label="Tools">
+                          <use xlink:href="icon/bootstrap-icons.svg#plus-circle"/> 
+                        </svg>
+                        </button>
+                    </span>
+                </div>
+            </div>
           
             <!-- Submit button -->
-            <button data-mdb-ripple-init type="button" class="btn btn-primary btn-block mb-4" >Place order</button>
-          </form>          <a href="#" class="btn btn-primary" onclick="prova()">Inserisci</a>
+            <button data-mdb-ripple-init type="button" class="btn btn-primary btn-block mb-4 mt-3" >Place order</button>
+          </form>       
+             <a href="#" class="btn btn-primary" onclick="prova()">Inserisci</a>
         </div>
       </div>
     
@@ -352,6 +338,7 @@ $result = $db->conn->query("SELECT * FROM prodotti");
     </main>
   </div>
 </div>
+<button onclick="cambiaPrezzo()">okokok</button>
 <script src="js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script>
   
@@ -372,31 +359,110 @@ if(e.target.matches(".nav-link")) {
 
 
 
+
 <!-- CHIAMATE AJAX  -->
 <script>
+  
+  
+  $(document).ready(function(){
+
+    var quantitiy=0;
+   $('.quantity-right-plus').click(function(e){
+    var prezzo = $('#prezzo').val();
+
+
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+        
+        // If is not undefined
+            
+            $('#quantity').val(quantity + 1);
+            //raddoppio il value del prezzo se incrementa
+            var prezzoMoltiplicato = prezzo * 2;
+            $('#prezzo').val(prezzoMoltiplicato);
+
+ 
+          
+            // Increment
+        
+    });
+
+     $('.quantity-left-minus').click(function(e){
+      var prezzo = $('#prezzo').val();
+
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+        
+        // If is not undefined
+      
+            // Increment
+            if(quantity>1){
+            $('#quantity').val(quantity - 1);
+            var prezzoDiviso = prezzo / 2 ;
+            $('#prezzo').val(prezzoDiviso);
+
+            }
+    });
+    
+});
+
+
+  function cambiaPrezzo() {
+    var id = $('#idsl_disponibilita').val();
+    var prezzo ;
+    $.ajax({
+        type: "POST",
+        url: 'action.php?_action=recuperaProdNome&_k='+encodeURIComponent(id),
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (result)
+        {
+
+          $('#prezzo').val(result);
+      
+      // Imposta il testo restituito nell'elemento con id 'prezzo_text'
+          // $('#prezzo').text(result);
+
+          console.log(result);
+
+        },
+        error: function () 
+        {
+          console.log("Chiamata fallita, si prega di riprovare...");
+        }
+      });
+
+  }
 
 
   function prova(){
+    var idProdotto = $('#idsl_disponibilita').val();
+    var prezzo = $('#prezzo').val();
+    var prd = $('#quantity').val();
 
-    var nome = $('#nome').val();
+     alert(idProdotto + prezzo + prd);
+  //   $.ajax({
+	// 		type: "POST",
+	// 		url: 'action.php?_action=inserisciProdotto&_nome='+encodeURIComponent(idProdotto)+'&_prezzo=30'+'&_fornitore=ciao',
+	// 		cache: false,
+	// 		contentType: false,
+	// 		processData: false,
+	// 		success: function (result)
+	// 		{
 
+	// 			alert(result)
 
-    $.ajax({
-			type: "POST",
-			url: 'action.php?_action=inserisciProdotto&_nome='+encodeURIComponent(nome)+'&_prezzo=30'+'&_fornitore=ciao',
-			cache: false,
-			contentType: false,
-			processData: false,
-			success: function (result)
-			{
-
-				alert(result)
-
-			},
-			error: function () 
-			{
-				console.log("Chiamata fallita, si prega di riprovare...");
-			}
-		});
+	// 		},
+	// 		error: function () 
+	// 		{
+	// 			console.log("Chiamata fallita, si prega di riprovare...");
+	// 		}
+	// 	});
   }
+
 </script>
