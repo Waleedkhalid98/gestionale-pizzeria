@@ -1,10 +1,11 @@
 <?php
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
 
 
+$stato =  'display:none;';
 $__invia="";
 
 if(isset($_GET['_invia'])) {
@@ -37,7 +38,27 @@ if(isset($_GET['code'])) {
 }
 
 
+// $mail = new PHPMailer\PHPMailer\PHPMailer();
+// $db = new Database();
 
+// $mail->isSMTP();
+// $mail->Host = 'smtp.gmail.com';
+// $mail->SMTPAuth = true;
+// $mail->Username = 'waleed.khalid@studenti.unicam.it';
+// $mail->Password = 'hnph jqfm ptzf ezwd';
+// $mail->SMTPSecure = 'tls'; // o 'ssl'
+// $mail->Port = 587; // o 465 per SSL
+
+// $mail->setFrom('from@example.com', 'Nome Mittente');
+// $mail->addAddress('waleed.khalid@studenti.unicam.it', 'Nome Destinatario');
+// $mail->Subject = 'Oggetto dell\'email';
+// $mail->Body = 'Contenuto dell\'email';
+
+// if (!$mail->send()) {
+//   echo 'Errore durante l\'invio dell\'email: ' . $mail->ErrorInfo;
+// } else {
+//   echo 'Email inviata correttamente!';
+// }
 
 
 
@@ -79,11 +100,18 @@ $mail->Body=$body;
 
 
     if($mail->send()){
+
         echo "send mail";
+        $stato =  'display:block;';
+
     }else{
         echo "error";
+        $stato =  'display:none;';
+
     }
 }
+
+
 
 
 ?>
@@ -115,7 +143,7 @@ $mail->Body=$body;
         <div class="alert alert-danger" role="alert" id="alertDiv"  style="display:none;" >
     This is a danger alert—check it out!
   </div>
-  <div class="alert alert-success" role="alert"  id="successDiv" style="display:none;">
+  <div class="alert alert-success" role="alert"  id="successDiv" style="<?php echo $stato ?>">
   Ordine inviato!
 </div>
     <div id="rows-container">
@@ -235,8 +263,6 @@ function checkAndSubmit() {
   }
 
   if (invalidCodes.length === 0) {
-    alertDiv.style.display = 'none';
-    successDiv.style.display = 'block';
     // alert('Inviato');
     document.getElementById('_invia').value = 'ok';
     // Puoi anche inviare il form qui se necessario:

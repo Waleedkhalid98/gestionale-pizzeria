@@ -24,6 +24,20 @@ switch($paction)
 
     break;
 
+    case "inserisciOrdine": 
+
+        $idProdotto=get_param("_id");
+        $prezzo=get_param("_prezzo");
+        $quantita=get_param("_quantita");
+        
+            if ($db->insertOrdine($idProdotto, $prezzo, $quantita)) {
+            echo "Ordine inserito con successo";
+            } else {
+                echo "Errore nell'inserimento del prodotto";
+            }
+
+    break;
+
     case "RecuperoProdotti":
 
         $risultato  = $db->ottieniProdotti();
@@ -31,10 +45,6 @@ switch($paction)
        
     break;  
     
-    case"ciao":
-        echo "ciao";
-    break;  
-
     case "recuperaProdNome";
         
         $id = get_param("_k");
@@ -42,6 +52,7 @@ switch($paction)
 
         echo $prezzo;
     break;
+ 
     
 }   
 ?>

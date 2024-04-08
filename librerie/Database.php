@@ -29,7 +29,21 @@ class Database {
     }
 
     
+    public function insertOrdine($id_prodotto, $prezzp, $quantita) {
+        $id_prodotto = $this->conn->real_escape_string($id_prodotto);
+        $prezzo = $this->conn->real_escape_string($prezzp);
+        $quantita = $this->conn->real_escape_string($quantita);
+        $data = date('Y-m-d'); // Ottieni la data corrente nel formato 'YYYY-MM-DD HH:MM:SS'
 
+
+        $sql = "INSERT INTO ordini (id_prodotto, data_inserimento, prezzo, quantita) VALUES ('$id_prodotto','$data', '$prezzo', '$quantita')";
+
+        if ($this->conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function ottieniProdotti (){
         $result = $this->conn->query("SELECT * FROM prodotti");

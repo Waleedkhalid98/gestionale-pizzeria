@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+
+</head>
+<body>
+  <canvas id="myChart" style="width:10%;max-width:300px;max-height:300px"></canvas>
+  <script>
+    // Ottieni il riferimento all'elemento canvas
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    // Definisci i dati del grafico
+    const data = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'My First Dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 8, 6, 4, 3, 1]
+      }]
+    };
+
+    // Configura il grafico
+    const config = {
+      type: 'line',
+      data: data,
+      options: {}
+    };
+
+    // Crea il grafico utilizzando Chart.js
+    const myChart = new Chart(ctx, config);
+  </script>
+</body>
+</html>
